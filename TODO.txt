@@ -1,0 +1,18 @@
+ok - methode add secteur activité
+- méthode add structure
+ok - mettre a jour secteur
+- mettre à jour structure
+ok - suppr secteur (supprimer jointure d'abord)
+- suppr activite (supprier jointure first)
+
+
+-filtrer par entreprise/assoc, secteur d'acitivité
+
+- split dao en plusieurs manager
+
+- à l'appel de index.php -> rediriger vers diferent controleur
+
+- changer architecture
+
+- js : transformer span en input
+
