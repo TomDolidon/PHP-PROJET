@@ -9,13 +9,11 @@
 
                 <form name="" action="<?= $ROUTE_URL ?>index.php" method="get">
 
-                    <div class="row">
 
-                        <span class="col-lg-4 offset-lg-1">Libelle : </span>
+                    <span class="col-lg-4 offset-lg-1">Libelle : </span>
 
-                        <input class="col-lg-4 offset-lg-1" type="text" name="libelle" value="<?= isset($secteur) ? $secteur['LIBELLE'] : "" ?>"/>
+                    <input class="col-lg-4 offset-lg-1" type="text" name="libelle" value="<?= isset($secteur) ? $secteur['LIBELLE'] : "" ?>"/>
 
-                    </div>
 
                     <input type="hidden" name="controller" value="secteurController"/>
 
