@@ -1,5 +1,6 @@
 <body>
 
+    <div class="container">
 
 <form name="" action="<?= $ROUTE_URL ?>index.php" method="get">
     <label for="">Libelle</label>
@@ -27,5 +28,6 @@
 </form>
 <a href="<?= $ROUTE_URL ?>index.php?controller=indexController" > <input type="reset" value="Annuler"/></a>
 <?php if (isset($erreur))echo $erreur; ?>
+
 
 </body>

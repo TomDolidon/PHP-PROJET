@@ -10,10 +10,6 @@ class secteur_structureManager {
 
 
     public static function addOne($id_structure, $id_secteur){
-
-        var_dump($id_structure);
-        var_dump($id_secteur);
-
         try {
             $conn = connexionSQL();
             $stmt = $conn->prepare("insert into secteurs_structures(id_structure, id_secteur) values (:id_structure, :id_secteur)");
@@ -23,7 +19,7 @@ class secteur_structureManager {
                     ":id_structure" => $id_structure ,
                     ":id_secteur" => $id_secteur
                 ]);
-            var_dump($res);
+           // var_dump($res);
 
 
         }
@@ -41,8 +37,8 @@ class secteur_structureManager {
 
             //var_dump($stmt);
             $res=$stmt->execute([":id" => $id]);
-            var_dump($res);
-            var_dump($stmt);
+      //     var_dump($res);
+       //     var_dump($stmt);
         }
         catch(PDOException $e)
         {
@@ -57,8 +53,8 @@ class secteur_structureManager {
 
             //var_dump($stmt);
             $res=$stmt->execute([":id" => $id]);
-            var_dump($res);
-            var_dump($stmt);
+          //  var_dump($res);
+          //  var_dump($stmt);
         }
         catch(PDOException $e)
         {
