@@ -27,6 +27,44 @@ public static function getAllSecteurs() {
     }
 }
 
+    public static function getSecteurById($id) {
+
+        try {
+            $conn = connexionSQL();
+            $stmt = $conn->prepare("select * from secteur where  id = :id");
+            $res=$stmt->execute([":id" => $id]);
+
+            if ($res) {
+                $lines = $stmt->fetchAll(PDO::FETCH_BOTH);
+            }
+            // fermeture de la connexion
+            $conn = null;
+            return $lines;
+        }catch(PDOException $e)
+        {
+            echo "Error ".$e->getCode()." : ".$e->getMessage()."<br/>".$e->getTraceAsString();
+        }
+    }
+/*
+    public static function getSecteurByLibelle($libelle) {
+
+        try {
+            $conn = connexionSQL();
+            $stmt = $conn->prepare("select * from secteur where  libelle = :libelle");
+            $res=$stmt->execute([":libelle" => $libelle]);
+
+            if ($res) {
+                $lines = $stmt->fetchAll(PDO::FETCH_BOTH);
+            }
+            // fermeture de la connexion
+            $conn = null;
+            return $lines;
+        }catch(PDOException $e)
+        {
+            echo "Error ".$e->getCode()." : ".$e->getMessage()."<br/>".$e->getTraceAsString();
+        }
+    }
+*/
 public static function addSecteur($libelle){
     try {
         $conn = connexionSQL();
@@ -59,8 +97,8 @@ public static function updateSecteur($id, $libelle){
     }
 }
 
-//todo delete jointures before
 public static function deleteSecteurById($id) {
+
     try {
         $conn = connexionSQL();
         $stmt = $conn->prepare("delete from secteur where id = :id  ");
@@ -75,6 +113,8 @@ public static function deleteSecteurById($id) {
         echo "Error ".$e->getCode()." : ".$e->getMessage()."<br/>".$e->getTraceAsString();
     }
 }
+
+
 
 }
 ?>

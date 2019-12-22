@@ -2,6 +2,8 @@
 session_start();
 
 require_once "./config/route.php";
+require_once "./controller/fonctions.php";
+
 
 $action = null;
 if (isset($_REQUEST['action'])) {
