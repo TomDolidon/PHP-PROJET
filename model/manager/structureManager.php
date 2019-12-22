@@ -83,30 +83,39 @@ class structureManager
         try {
             $conn = connexionSQL();
             $stmt = $conn->prepare('UPDATE structure SET 
-                id = :id,
 			    nom = :nom, 
 				rue = :rue, 
 				cp = :cp,
 				ville = :ville, 
 				estasso = :estasso, 
 				nb_donateurs = :nb_donateurs,
-				nb_actionnaires = :nb_actionnaires,
+				nb_actionnaires = :nb_actionnaires
 			    WHERE id = :id
 			    '
             );
 
-            //var_dump($stmt);
-            $res = $stmt->execute(array(
-                ":id" => $id,
-                    ":nom" => $structure['nom'],
-                    ":rue" => $structure['rue'],
-                    ":cp" => $structure['cp'],
-                    ":ville" => $structure['ville'],
-                    ":estasso" => $structure['estasso'],
-                    ":nb_donateurs" => $structure['nb_donateurs'],
+            $res = $stmt->execute([
+                ":nom" => $structure['nom'],
+                ":rue" => $structure['rue'],
+                ":cp" => $structure['cp'],
+                ":ville" => $structure['ville'],
+                ":estasso" => $structure['estasso'],
+                ":nb_donateurs" => $structure['nb_donateurs'],
                 ":nb_actionnaires" => $structure['nb_actionnaires'],
+                ":id" => $id
+            ]);
 
-            ));
+            //var_dump($stmt);
+      /*      $res = $stmt->execute([
+                ":nom" => $structure['nom'],
+                ":rue" => $structure['rue'],
+                ":cp" => $structure['cp'],
+                ":ville" => $structure['ville'],
+                ":estasso" => $structure['estasso'],
+                ":nb_donateurs" => $structure['nb_donateurs'],
+                ":nb_actionnaires" => $structure['nb_actionnaires'],
+                ":id" => $id
+            ]); */
 
         } catch (PDOException $e) {
             echo "Error " . $e->getCode() . " : " . $e->getMessage() . "<br/>" . $e->getTraceAsString();

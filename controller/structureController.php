@@ -77,11 +77,8 @@ if(isset($_GET)) {
                     }
             }
 
-
-        // todo : reste plus qu'à faire ca et gg !
+            // on update en base la structure avec les nouvelles valeurs
             structureManager::updateStructure(intval($_GET['id']), $structure);
-
-
 
             $structures = structureManager::getAllStructures();
             $secteurs = secteurManager::getAllSecteurs();

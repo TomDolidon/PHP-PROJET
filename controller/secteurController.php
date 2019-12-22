@@ -19,8 +19,6 @@ if (isset($_GET)) {
 
         case 'edit':
 
-            // on appelle la vue formulaire de secteur
-
             $secteur = secteurManager::getSecteurById($_GET['id'])[0];
 
             $view = "formSecteur";
