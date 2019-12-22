@@ -65,54 +65,81 @@ if(isset($_GET)) {
                 "nb_donateurs" => (isset($_GET['nb_donateurs'])) ?intval($_GET['nb_donateurs']) : null,
             ];
 
-            $checkedSecteurs = isset($_GET['secteurs']) ?$_GET['secteurs'] : [] ;
+            $formIsOk = validateForm($structure);
 
-            // on supprimer toute les jointures pour cette structure
-            secteur_structureManager::deleteSecteurStructureByStructureId(intval($_GET['id']));
+            if ($formIsOk != "OK") {
 
-            // on rajoute dans la table de jointure ceux qui sont check
-            foreach ($checkedSecteurs as $secteur) {
-                    if (!isset(secteur_structureManager::getByStructureAndSecteurId(intval($_GET['id']), intval($checkedSecteurs))[0])){
-                        secteur_structureManager::addOne( intval($_GET['id']), intval($secteur));
-                    }
+                $errorMessage = $formIsOk;
+
+                var_dump($errorMessage);
+
+                $view = "formStructure";
+
+            } else {
+
+                $checkedSecteurs = isset($_GET['secteurs']) ?$_GET['secteurs'] : [] ;
+
+                // on supprimer toute les jointures pour cette structure
+                secteur_structureManager::deleteSecteurStructureByStructureId(intval($_GET['id']));
+
+                // on rajoute dans la table de jointure ceux qui sont check
+                foreach ($checkedSecteurs as $secteur) {
+                        if (!isset(secteur_structureManager::getByStructureAndSecteurId(intval($_GET['id']), intval($checkedSecteurs))[0])){
+                            secteur_structureManager::addOne( intval($_GET['id']), intval($secteur));
+                        }
+                }
+
+                // on update en base la structure avec les nouvelles valeurs
+                structureManager::updateStructure(intval($_GET['id']), $structure);
+
+                $structures = structureManager::getAllStructures();
+                $secteurs = secteurManager::getAllSecteurs();
+
+                $view = "accueil";
             }
-
-            // on update en base la structure avec les nouvelles valeurs
-            structureManager::updateStructure(intval($_GET['id']), $structure);
-
-            $structures = structureManager::getAllStructures();
-            $secteurs = secteurManager::getAllSecteurs();
-
-            $view = "accueil";
             break;
 
         case 'submit_new':
+
             $structure = [
-               "nom"  => $_GET['nom'],
-                "rue"  => $_GET['rue'],
-                "cp"  =>$_GET['cp'],
-                "ville"  =>  $_GET['ville'],
-                "estasso" => $_GET['estasso'],
-                "nb_actionnaires" => (isset($_GET['nb_actionnaires'])) ? $_GET['nb_actionnaires'] : null,
-                "nb_donateurs" => (isset($_GET['nb_donateurs'])) ?$_GET['nb_donateurs'] : null,
-            ];
+                "nom"  => $_GET['nom'],
+                 "rue"  => $_GET['rue'],
+                 "cp"  =>$_GET['cp'],
+                 "ville"  =>  $_GET['ville'],
+                 "estasso" => $_GET['estasso'],
+                 "nb_actionnaires" => (isset($_GET['nb_actionnaires'])) ? $_GET['nb_actionnaires'] : null,
+                 "nb_donateurs" => (isset($_GET['nb_donateurs'])) ?$_GET['nb_donateurs'] : null,
+             ];
 
+             var_dump($structure);
 
-            $idStructure = structureManager::addStructure($structure);
+            $formIsOk = validateForm($structure);
 
-            $secteurs = isset($_GET['secteurs']) ?$_GET['secteurs'] : [] ;
+            if ($formIsOk != "OK") {
 
-            foreach ($secteurs as $secteur) {
-                secteur_structureManager::addOne( intval($idStructure), intval($secteur));
+                $errorMessage = $formIsOk;
+
+                var_dump($errorMessage);
+
+                $view = "formStructure";
+
+            } else {
+
+                $idStructure = structureManager::addStructure($structure);
+
+                $secteurs = isset($_GET['secteurs']) ?$_GET['secteurs'] : [] ;
+    
+                foreach ($secteurs as $secteur) {
+                    secteur_structureManager::addOne( intval($idStructure), intval($secteur));
+                }
+    
+                $structures = structureManager::getAllStructures();
+                $secteurs = secteurManager::getAllSecteurs();
+    
+                $view = "accueil";
             }
+        break;
 
-
-
-            $structures = structureManager::getAllStructures();
-            $secteurs = secteurManager::getAllSecteurs();
-
-            $view = "accueil";
-            break;
     }
 }
 

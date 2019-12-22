@@ -72,8 +72,8 @@ public static function addSecteur($libelle){
 
         //var_dump($stmt);
         $res=$stmt->execute([":libelle" => $libelle]);
-        var_dump($res);
-        var_dump($stmt);
+       // var_dump($res);
+        //var_dump($stmt);
     }
     catch(PDOException $e)
     {
@@ -88,8 +88,8 @@ public static function updateSecteur($id, $libelle){
 
         //var_dump($stmt);
         $res=$stmt->execute([":libelle" => $libelle, ":id" => $id]);
-        var_dump($res);
-        var_dump($stmt);
+        //var_dump($res);
+        //var_dump($stmt);
     }
     catch(PDOException $e)
     {
@@ -105,8 +105,8 @@ public static function deleteSecteurById($id) {
 
         //var_dump($stmt);
         $res=$stmt->execute([":id" => $id]);
-        var_dump($res);
-        var_dump($stmt);
+        //var_dump($res);
+        //var_dump($stmt);
     }
     catch(PDOException $e)
     {

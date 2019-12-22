@@ -13,7 +13,6 @@ if (isset($_GET)) {
     switch ($action) {
         case 'new':
 
-
             $view = "formSecteur";
             break;
 
@@ -37,51 +36,72 @@ if (isset($_GET)) {
 
         case 'submit_new':
 
-            // On vérifie qu'aucune entité porte déjà ce libelle
-            $libelle = $_GET['libelle'];
-            $exist = false;
-            foreach (secteurManager::getAllSecteurs() as $_secteur) {
-                if ($_secteur['LIBELLE'] == $libelle) $exist = true;
-            }
-            if (!$exist) {
-                secteurManager::addSecteur($libelle);
-            } else {
-                $erreur = "Ce libelle est déjà utilisé";
+            if ( $_GET['libelle'] == "") {
+
+                $errorMessage = "Ce champ est obligatoire";                
                 $view = "formSecteur";
-                break;
+                
+            } else {
+                // On vérifie qu'aucune entité porte déjà ce libelle
+                $libelle = $_GET['libelle'];
+                $exist = false;
+                foreach (secteurManager::getAllSecteurs() as $_secteur) {
+                    if ($_secteur['LIBELLE'] == $libelle) $exist = true;
+                }
+                if (!$exist) {
+                    secteurManager::addSecteur($libelle);
+                } else {
+                    $erreur = "Ce libelle est déjà utilisé";
+                    $view = "formSecteur";
+                    break;
+                }
+                $secteurs = SecteurManager::getAllSecteurs();
+                $structures = structureManager::getAllStructures();
+                // on appelle la vue formulaire de secteur
+                $view = "accueil";
             }
-            $secteurs = SecteurManager::getAllSecteurs();
-            $structures = structureManager::getAllStructures();
-            // on appelle la vue formulaire de secteur
-            $view = "accueil";
+
             break;
 
         // update secteur
         case 'submit_update':
 
-            // On vérifie qu'aucune entité porte déjà ce libelle
-            $libelle = $_GET['libelle'];
-            $exist = false;
-            foreach (secteurManager::getAllSecteurs() as $_secteur) {
-                if ($_secteur['LIBELLE'] == $libelle) $exist = true;
-            }
-            if (!$exist) {
-                secteurManager::updateSecteur($_GET['id'], $libelle);
-            } else {
-                $erreur = "Ce libelle est déjà utilisé";
+            //on vérifie que le champ n'est pas vide
+            if ( $_GET['libelle'] == "") {
+
+                $errorMessage = "Ce champ est obligatoire";           
+                
                 $secteur = [
                     'ID' => $_GET['id'], 'LIBELLE' => $_GET['libelle'],
                 ];
+
                 $view = "formSecteur";
+                
+            } else {
+
+                // On vérifie qu'aucune entité porte déjà ce libelle
+                $libelle = $_GET['libelle'];
+                $exist = false;
+                foreach (secteurManager::getAllSecteurs() as $_secteur) {
+                    if ($_secteur['LIBELLE'] == $libelle) $exist = true;
+                }
+                if (!$exist) {
+                    secteurManager::updateSecteur($_GET['id'], $libelle);
+                } else {
+                    $errorMessage = "Ce libelle est déjà utilisé";
+                    $secteur = [
+                        'ID' => $_GET['id'], 'LIBELLE' => $_GET['libelle'],
+                    ];
+                    $view = "formSecteur";
+                    break;
+                }
+
+                $secteurs = SecteurManager::getAllSecteurs();
+                $structures = structureManager::getAllStructures();
+
+                $view = "accueil";
                 break;
             }
-
-
-            $secteurs = SecteurManager::getAllSecteurs();
-            $structures = structureManager::getAllStructures();
-            // on appelle la vue formulaire de secteur
-            $view = "accueil";
-            break;
     }
 }
 

@@ -114,18 +114,6 @@ class structureManager
                 ":id" => $id
             ]);
 
-            //var_dump($stmt);
-      /*      $res = $stmt->execute([
-                ":nom" => $structure['nom'],
-                ":rue" => $structure['rue'],
-                ":cp" => $structure['cp'],
-                ":ville" => $structure['ville'],
-                ":estasso" => $structure['estasso'],
-                ":nb_donateurs" => $structure['nb_donateurs'],
-                ":nb_actionnaires" => $structure['nb_actionnaires'],
-                ":id" => $id
-            ]); */
-
         } catch (PDOException $e) {
             echo "Error " . $e->getCode() . " : " . $e->getMessage() . "<br/>" . $e->getTraceAsString();
         }

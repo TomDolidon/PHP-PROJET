@@ -197,13 +197,13 @@
 
         </table>
 
-        <a class="btn btn-primary col-lg-2 offset-lg-5 mt-4" href="<?= $ROUTE_URL ?>index.php?controller=structureController&action=new&type=entreprise"> Nouveau </a>
+        <a class="btn btn-primary col-lg-2 offset-lg-5 mt-4 mb-4" href="<?= $ROUTE_URL ?>index.php?controller=structureController&action=new&type=entreprise"> Nouveau </a>
 
       </div>
       
     </div>
   </div>
 
-
 </body>
+
 </html>

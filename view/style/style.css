@@ -23,3 +23,14 @@ h2 {
 .formTitle {
  margin: 50px !important;
 }
+
+.errorMessage {
+    font-weight: 600;
+    font-size: 15px;
+    color: red;
+    text-align: center;
+}
+
+.divInput {
+    margin: 20px 0;
+}
