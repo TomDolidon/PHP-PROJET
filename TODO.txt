@@ -1,18 +1,19 @@
-ok - methode add secteur activité
-- méthode add structure
-ok - mettre a jour secteur
-- mettre à jour structure
-ok - suppr secteur (supprimer jointure d'abord)
-- suppr activite (supprier jointure first)
+﻿ok - get all secteur
+ok - new secteur 
+
+ok - update secteur
+ok delete secteur
+
+ok - get all structures
+- new structure  **
+- update structure **
+ok- delete structure
 
 
--filtrer par entreprise/assoc, secteur d'acitivité
+-> check si libelle existe pas avant update secteur
 
-- split dao en plusieurs manager
+-
 
-- à l'appel de index.php -> rediriger vers diferent controleur
 
-- changer architecture
 
-- js : transformer span en input
 

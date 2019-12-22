@@ -6,66 +6,129 @@ use PDO;
 
 require_once "./model/dbProvider.php";
 
-class structureManager {
+class structureManager
+{
 
 
-public static function getAllStructures() {
+    public static function getAllStructures()
+    {
 
-    try {
-        $conn = connexionSQL();
-        $stmt = $conn->prepare("select * from structure");
-        $res = $stmt->execute();
-        if ($res) {
-            $lines = $stmt->fetchAll(PDO::FETCH_BOTH);
+        try {
+            $conn = connexionSQL();
+            $stmt = $conn->prepare("select * from structure");
+            $res = $stmt->execute();
+            if ($res) {
+                $lines = $stmt->fetchAll(PDO::FETCH_BOTH);
+            }
+            // fermeture de la connexion
+            $conn = null;
+            return $lines;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getCode() . " : " . $e->getMessage() . "<br/>" . $e->getTraceAsString();
         }
-        // fermeture de la connexion
-        $conn = null;
-        return $lines;
-    }catch(PDOException $e)
+    }
+
+    public static function getStructurerById($id)
     {
-        echo "Error ".$e->getCode()." : ".$e->getMessage()."<br/>".$e->getTraceAsString();
-    }
-}
 
-public static function deleteSecteurStructure($id) {
-    try {
-        $conn = connexionSQL();
-        $stmt = $conn->prepare("delete from secteurs_structures where id_secteur = :id  ");
+        try {
+            $conn = connexionSQL();
+            $stmt = $conn->prepare("select * from structure where  id = :id");
+            $res = $stmt->execute([":id" => $id]);
 
-        //var_dump($stmt);
-        $res=$stmt->execute([":id" => $id]);
-        var_dump($res);
-        var_dump($stmt);
+            if ($res) {
+
+                // TODO recupe objet pas tableau
+                $lines = $stmt->fetchAll(PDO::FETCH_BOTH);
+            }
+            // fermeture de la connexion
+            $conn = null;
+            return $lines;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getCode() . " : " . $e->getMessage() . "<br/>" . $e->getTraceAsString();
+        }
     }
-    catch(PDOException $e)
+
+
+
+    public static function addStructure($structure)
     {
-        echo "Error ".$e->getCode()." : ".$e->getMessage()."<br/>".$e->getTraceAsString();
+
+        try {
+            $conn = connexionSQL();
+            $stmt = $conn->prepare("insert into structure(nom, rue, cp, ville, estasso,nb_actionnaires, nb_donateurs ) values (:nom, :rue, :cp, :ville, :estasso, :nb_actionnaires, :nb_donateurs)");
+
+            //var_dump($stmt);
+            $res = $stmt->execute(
+                [":nom" => $structure['nom'],
+                    ":rue" => $structure['rue'],
+                    ":cp" => $structure['cp'],
+                    ":ville" => $structure['ville'],
+                    ":estasso" => $structure['estasso'],
+                    ":nb_actionnaires" => $structure['nb_actionnaires'],
+                    ":nb_donateurs" => $structure['nb_donateurs']
+
+                ]);
+            return $conn->lastInsertId("structure");
+
+
+        } catch (PDOException $e) {
+            echo "Error " . $e->getCode() . " : " . $e->getMessage() . "<br/>" . $e->getTraceAsString();
+        }
     }
-}
 
-public static function addStructure() {
-
-}
-
-public static function updateStructure(){
-
-}
-
-public static function deleleStructureById($id){
-    try {
-        $conn = connexionSQL();
-        $stmt = $conn->prepare("delete from structure where id = :id  ");
-
-        //var_dump($stmt);
-        $res=$stmt->execute([":id" => $id]);
-        var_dump($res);
-        var_dump($stmt);
-    }
-    catch(PDOException $e)
+    public static function updateStructure($id, $structure)
     {
-        echo "Error ".$e->getCode()." : ".$e->getMessage()."<br/>".$e->getTraceAsString();
+
+        try {
+            $conn = connexionSQL();
+            $stmt = $conn->prepare('UPDATE structure SET 
+                id = :id,
+			    nom = :nom, 
+				rue = :rue, 
+				cp = :cp,
+				ville = :ville, 
+				estasso = :estasso, 
+				nb_donateurs = :nb_donateurs,
+				nb_actionnaires = :nb_actionnaires,
+			    WHERE id = :id
+			    '
+            );
+
+            //var_dump($stmt);
+            $res = $stmt->execute(array(
+                ":id" => $id,
+                    ":nom" => $structure['nom'],
+                    ":rue" => $structure['rue'],
+                    ":cp" => $structure['cp'],
+                    ":ville" => $structure['ville'],
+                    ":estasso" => $structure['estasso'],
+                    ":nb_donateurs" => $structure['nb_donateurs'],
+                ":nb_actionnaires" => $structure['nb_actionnaires'],
+
+            ));
+
+        } catch (PDOException $e) {
+            echo "Error " . $e->getCode() . " : " . $e->getMessage() . "<br/>" . $e->getTraceAsString();
+        }
+
     }
-}
+
+    public static function deleleStructureById($id)
+    {
+
+
+        try {
+            $conn = connexionSQL();
+            $stmt = $conn->prepare("delete from structure where id = :id  ");
+
+            //var_dump($stmt);
+            $res = $stmt->execute([":id" => $id]);
+
+        } catch (PDOException $e) {
+            echo "Error " . $e->getCode() . " : " . $e->getMessage() . "<br/>" . $e->getTraceAsString();
+        }
+    }
 }
 
 ?>

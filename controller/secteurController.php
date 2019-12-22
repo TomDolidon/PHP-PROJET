@@ -1,40 +1,88 @@
-
 <?php
 
+use model\manager\structureManager;
 use model\manager\secteurManager;
+use model\manager\secteur_structureManager;
 
+require_once './model/manager/structureManager.php';
 require_once './model/manager/secteurManager.php';
+require_once './model/manager/secteur_structureManager.php';
 
-if(isset($_GET)) {
+if (isset($_GET)) {
 
-    switch($action) {
+    switch ($action) {
         case 'new':
 
-            // on appelle la vue formulaire de secteur
 
             $view = "formSecteur";
             break;
-        
+
         case 'edit':
 
             // on appelle la vue formulaire de secteur
+
+            $secteur = secteurManager::getSecteurById($_GET['id'])[0];
 
             $view = "formSecteur";
             break;
 
         case 'delete':
 
+            secteur_structureManager::deleteSecteurStructureBySecteurId($_GET['id']);
             secteurManager::deleteSecteurById($_GET['id']);
 
             $secteurs = SecteurManager::getAllSecteurs();
+            $structures = structureManager::getAllStructures();
 
             $view = "accueil";
             break;
 
-        case 'submit':
+        case 'submit_new':
 
-            //lorsqu'o valide le formulaire de création / modifictaion
+            // On vérifie qu'aucune entité porte déjà ce libelle
+            $libelle = $_GET['libelle'];
+            $exist = false;
+            foreach (secteurManager::getAllSecteurs() as $_secteur) {
+                if ($_secteur['LIBELLE'] == $libelle) $exist = true;
+            }
+            if (!$exist) {
+                secteurManager::addSecteur($libelle);
+            } else {
+                $erreur = "Ce libelle est déjà utilisé";
+                $view = "formSecteur";
+                break;
+            }
+            $secteurs = SecteurManager::getAllSecteurs();
+            $structures = structureManager::getAllStructures();
+            // on appelle la vue formulaire de secteur
+            $view = "accueil";
+            break;
 
+        // update secteur
+        case 'submit_update':
+
+            // On vérifie qu'aucune entité porte déjà ce libelle
+            $libelle = $_GET['libelle'];
+            $exist = false;
+            foreach (secteurManager::getAllSecteurs() as $_secteur) {
+                if ($_secteur['LIBELLE'] == $libelle) $exist = true;
+            }
+            if (!$exist) {
+                secteurManager::updateSecteur($_GET['id'], $libelle);
+            } else {
+                $erreur = "Ce libelle est déjà utilisé";
+                $secteur = [
+                    'ID' => $_GET['id'], 'LIBELLE' => $_GET['libelle'],
+                ];
+                $view = "formSecteur";
+                break;
+            }
+
+
+            $secteurs = SecteurManager::getAllSecteurs();
+            $structures = structureManager::getAllStructures();
+            // on appelle la vue formulaire de secteur
+            $view = "accueil";
             break;
     }
 }

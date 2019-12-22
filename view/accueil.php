@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-lg-8 offset-lg-2">
 
-        <h2> Liste des secteurs d'activités :</h1>
+        <h2> Liste des secteurs d'activités :</h2>
 
         <a href="<?= $ROUTE_URL ?>index.php?controller=secteurController&action=new"> Nouveau </a>
 
@@ -58,9 +58,9 @@
     <div class="row">
       <div class="col-lg-8 offset-lg-2">
 
-        <h2> Liste des associations :</h1>
+        <h2> Liste des associations :</h2>
 
-        <a href="<?= $ROUTE_URL ?>index.php?controller=structureController&action=new"> Nouveau </a>
+        <a href="<?= $ROUTE_URL ?>index.php?controller=structureController&action=new&type=association"> Nouveau </a>
 
         <table>
           <thead>
@@ -128,9 +128,9 @@
     <div class="row">
       <div class="col-lg-8 offset-lg-2">
 
-        <h2> Liste des Entreprises :</h1>
+        <h2> Liste des Entreprises :</h2>
 
-        <a href="<?= $ROUTE_URL ?>index.php?controller=structureController&action=new"> Nouveau </a>
+        <a href="<?= $ROUTE_URL ?>index.php?controller=structureController&action=new&type=entreprise"> Nouveau </a>
 
         <table>
           <thead>

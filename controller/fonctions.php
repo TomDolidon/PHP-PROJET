@@ -1,5 +1,4 @@
 <?php
-require_once ('../Model/DAO.php');
 
 function createInput($nom,$type) {
     echo '<input type="'.$type.'"  name="'.$nom.'" id="'.$nom.'" value="';
