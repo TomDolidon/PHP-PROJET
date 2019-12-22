@@ -12,7 +12,6 @@ class structureManager
 
     public static function getAllStructures()
     {
-
         try {
             $conn = connexionSQL();
             $stmt = $conn->prepare("select * from structure");
@@ -31,8 +30,6 @@ class structureManager
                 }
 
             }
-            var_dump($lines);
-
             $conn = null;
             return $lines;
         } catch (PDOException $e) {
