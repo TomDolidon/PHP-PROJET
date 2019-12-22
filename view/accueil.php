@@ -80,6 +80,9 @@
               <th>
                 Donateurs
               </th>
+                <th>
+                    Types de secteurs
+                </th>
               <th>
                 Actions
               </th>
@@ -101,6 +104,7 @@
                 <td>". $s['CP'] ."</td>
                 <td>". $s['VILLE'] ."</td>
                 <td>". $s['NB_DONATEURS'] ."</td>
+                <td>". $s['SECTEURS'] ."</td>
 
 
                 <td>    
@@ -150,6 +154,9 @@
               <th>
                 Actionaires
               </th>
+                <th>
+                    Type de secteurs
+                </th>
               <th>
                 Actions
               </th>
@@ -171,8 +178,7 @@
                 <td>". $s['CP'] ."</td>
                 <td>". $s['VILLE'] ."</td>
                 <td>". $s['NB_ACTIONNAIRES'] ."</td>
-
-
+                <td>". $s['SECTEURS'] ."</td>
                 <td>    
                 <a class=\"btn btn-primary\" href='". $ROUTE_URL . "index.php?controller=structureController&action=edit&id=".
                 $s['ID']."

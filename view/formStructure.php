@@ -121,6 +121,8 @@
 
 </div>
 
-    </div>
+<a href="<?= $ROUTE_URL ?>index.php?controller=indexController" > <input type="reset" value="Annuler"/></a>
+</p>
+</form>
 
 </body>
