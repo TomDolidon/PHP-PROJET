@@ -22,10 +22,10 @@
              ";
         };
         ?>
-        <input type="reset" value="Annuler"/>
         <br>
-        <?php if (isset($erreur))echo $erreur; ?>
     </p>
 </form>
+<a href="<?= $ROUTE_URL ?>index.php?controller=indexController" > <input type="reset" value="Annuler"/></a>
+<?php if (isset($erreur))echo $erreur; ?>
 
 </body>

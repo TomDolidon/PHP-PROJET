@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f70cb6d5-3798-40c3-b5eb-88e5f1107f7f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/structureController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/structureController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/manager/structureManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/manager/structureManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/route.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/route.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/formSecteur.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/formSecteur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/formStructure.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/formStructure.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +64,7 @@
       <workItem from="1576948028734" duration="18947000" />
       <workItem from="1576967956606" duration="3173000" />
       <workItem from="1577005205084" duration="13770000" />
+      <workItem from="1577019984892" duration="1728000" />
     </task>
     <servers />
   </component>
@@ -78,10 +80,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1576959372914" />
-    <state x="655" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1577005210389">
+    <state x="655" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1577021543067">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="655" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577005210389" />
+    <state x="655" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577021543067" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1576964272014">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
