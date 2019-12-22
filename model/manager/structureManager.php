@@ -12,7 +12,6 @@ class structureManager
 
     public static function getAllStructures()
     {
-
         try {
             $conn = connexionSQL();
             $stmt = $conn->prepare("select * from structure");
@@ -20,7 +19,17 @@ class structureManager
             if ($res) {
                 $lines = $stmt->fetchAll(PDO::FETCH_BOTH);
             }
-            // fermeture de la connexion
+            // on récupère les libelles de chaque secteur
+            for ($i=0; $i<sizeof($lines);$i++){
+                $associationTablesArray = secteur_structureManager::getByStructureId($lines[$i]['ID']);
+                $lines[$i]['SECTEURS']="";
+                // on créer une varaible Secteurs à notre structure, contenant les libelles des structures (concatenées)
+                foreach ($associationTablesArray as $assoc){
+                    $secteur = secteurManager::getSecteurById($assoc['ID_SECTEUR'])[0];
+                    $lines[$i]['SECTEURS'] = $lines[$i]['SECTEURS'] . " " . $secteur['LIBELLE'] . " ";
+                }
+
+            }
             $conn = null;
             return $lines;
         } catch (PDOException $e) {
